@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         initPermission();
     }
 
+    /**
+     * check the permission
+     */
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void initPermission() {
         Logger.addLogAdapter(new AndroidLogAdapter() {
@@ -78,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * get the result from user action
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @android.support.annotation.NonNull String[] permissions, @android.support.annotation.NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -135,6 +144,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * import mnemonic wallet
+     * @param mnemonic
+     */
     private void importWallet(String mnemonic) {
         String[] pathArray = ETH_JAXX_TYPE.split("/");
         if (pathArray.length <= 1) {
@@ -185,10 +198,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void createHandle() {
-
-    }
-
+    /**
+     * covert mnemonic string to List<String>
+     * @param mnemonics
+     * @return
+     */
     private static String convertMnemonicList(List<String> mnemonics) {
         StringBuilder sb = new StringBuilder();
         for (String mnemonic : mnemonics
