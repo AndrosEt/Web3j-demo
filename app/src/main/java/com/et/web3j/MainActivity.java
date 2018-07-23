@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.et.web3j.util.SecureRandomUtils;
@@ -37,8 +38,9 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button btCreate, btImport;
+    private Button btCreate, btImport, btCleanData;
     private EditText etMnemonic;
+    private TextView tvResult;
 
     private final String password = "test1011";
     /**
@@ -109,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         btCreate = findViewById(R.id.bt_create);
         btImport = findViewById(R.id.bt_import);
         etMnemonic = findViewById(R.id.et_mnemonic);
+        tvResult = findViewById(R.id.tv_result);
+        btCleanData = findViewById(R.id.bt_clean_data);
 
         btCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,16 +134,25 @@ public class MainActivity extends AppCompatActivity {
         btImport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!etMnemonic.getText().toString().trim().equals("")) {
+                final String data = etMnemonic.getText().toString().trim();
+                if (!data.equals("")) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            importWallet(etMnemonic.getText().toString().trim());
+                            importWallet(data);
                         }
                     }).start();
+                    etMnemonic.setText("");
                 } else {
                     Toast.makeText(MainActivity.this, "pls input mnemonic", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btCleanData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvResult.setText("");
             }
         });
     }
@@ -192,6 +205,15 @@ public class MainActivity extends AppCompatActivity {
             String mnemonic = convertMnemonicList(mnemonicCode);
             Logger.d("Et Mnemonic : " + mnemonic);
             Logger.d("Et Address : " + address);
+            final StringBuilder builder = new StringBuilder();
+            builder.append("Et Mnemonic : " + mnemonic + "\n");
+            builder.append("Et Address : " + address + "\n" + "\n");
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    tvResult.setText(builder.toString());
+                }
+            });
 
         } catch (CipherException e) {
             e.printStackTrace();

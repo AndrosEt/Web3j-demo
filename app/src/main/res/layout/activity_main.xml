@@ -19,6 +19,7 @@
     <EditText
         android:id="@+id/et_mnemonic"
         android:hint="input mnemonic"
+        android:maxLines="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
@@ -26,6 +27,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="import mnemonic"
+        />
+    <TextView
+        android:id="@+id/tv_result"
+        android:enabled="true"
+        android:textIsSelectable="true"
+        android:focusable="true"
+        android:longClickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+    <Button
+        android:id="@+id/bt_clean_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="clean data"
         />
 
 </LinearLayout>
