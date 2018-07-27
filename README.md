@@ -4,6 +4,6 @@ You can telk to me some functions that you want to achieve or anything you think
 
 通用的以太坊基于bip44协议的助记词路径（有三种取回路径，默认使用第一种）
 
-  "m/44'/60'/0'/0/0";
-  "m/44'/60'/0'/0";
-  "m/44'/60'/1'/0/0";
+* "m/44'/60'/0'/0/0";
+* "m/44'/60'/0'/0";
+* "m/44'/60'/1'/0/0";
