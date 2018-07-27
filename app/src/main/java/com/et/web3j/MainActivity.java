@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.et.web3j.util.SecureRandomUtils;
 import com.et.web3j.web3jdemo.R;
+import com.mingle.widget.LoadingView;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btCreate, btImport, btCleanData;
     private EditText etMnemonic;
     private TextView tvResult;
+    private LoadingView loadingView;
 
     private final String password = "test1011";
     /**
@@ -113,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         etMnemonic = findViewById(R.id.et_mnemonic);
         tvResult = findViewById(R.id.tv_result);
         btCleanData = findViewById(R.id.bt_clean_data);
+        loadingView = findViewById(R.id.loadView);
 
         btCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +180,13 @@ public class MainActivity extends AppCompatActivity {
      * create wallet
      */
     private void createWallet(DeterministicSeed ds, String[] pathArray) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                tvResult.setVisibility(View.GONE);
+                loadingView.setVisibility(View.VISIBLE);
+            }
+        });
 
         byte[] seedBytes = ds.getSeedBytes();
         List<String> mnemonicCode = ds.getMnemonicCode();
@@ -211,6 +221,8 @@ public class MainActivity extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    tvResult.setVisibility(View.VISIBLE);
+                    loadingView.setVisibility(View.GONE);
                     tvResult.setText(builder.toString());
                 }
             });

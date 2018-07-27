@@ -22,20 +22,36 @@
         android:maxLines="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <Button
-        android:id="@+id/bt_import"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="import mnemonic"
-        />
-    <TextView
-        android:id="@+id/tv_result"
-        android:enabled="true"
-        android:textIsSelectable="true"
-        android:focusable="true"
-        android:longClickable="true"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/bt_import"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="import mnemonic"
+            />
+
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <TextView
+            android:id="@+id/tv_result"
+            android:enabled="true"
+            android:textIsSelectable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="150dp" />
+        <com.mingle.widget.LoadingView
+            android:visibility="gone"
+            android:id="@+id/loadView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
     <Button
         android:id="@+id/bt_clean_data"
         android:layout_width="wrap_content"
